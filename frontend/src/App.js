@@ -10,7 +10,26 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
+  const [placeholder, setPlaceholder] = useState("Search for a movie...");
+  const carouselRef = useRef(null);
   const searchTimeout = useRef(null);
+
+  useEffect(() => {
+    const movies = ["The Dark Knight", "Inception", "Interstellar", "Dune", "Parasite", "Everything Everywhere All at Once"];
+    let i = 0;
+    const interval = setInterval(() => {
+      setPlaceholder(`Search for "${movies[i]}"...`);
+      i = (i + 1) % movies.length;
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollCarousel = (direction) => {
+    if (carouselRef.current) {
+      const scrollAmount = direction === "left" ? -800 : 800;
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
 
   // 🌍 Search API
   const searchMovies = (text) => {
@@ -95,7 +114,7 @@ function App() {
             value={query}
             onChange={(e) => searchMovies(e.target.value)}
             onFocus={() => setIsDropdownOpen(true)}
-            placeholder="Search for a movie..."
+            placeholder={placeholder}
           />
           {isDropdownOpen && suggestions.length > 0 && (
             <div className="suggestions-dropdown">
@@ -150,36 +169,55 @@ function App() {
         </div>
       </div>
 
-      {/* 🎬 MOVIE GRID */}
+      {/* 🎬 MOVIE GRID / CAROUSEL */}
       <div className="content-section">
         {loading ? (
-          <div className="loading-spinner">Loading recommendations...</div>
-        ) : recommendations.length > 0 ? (
-          <>
-            <h2 className="section-title">Because you watched {selectedMovie?.title}</h2>
-            <div className="movie-grid">
-              {recommendations.map((m, i) => (
-                <div key={i} className="movie-card" onClick={() => selectMovie(m.title)}>
-                  <div className="movie-poster-wrapper">
-                    <img 
-                      className="movie-poster" 
-                      src={m.poster || "https://via.placeholder.com/300x450?text=No+Poster"} 
-                      alt={m.title} 
-                    />
-                  </div>
-                  <div className="movie-info">
-                    <h3 className="movie-title" title={m.title}>{m.title}</h3>
-                    <div className="movie-meta-small">
-                      <span>{m.year}</span>
-                      <span style={{ color: "var(--red-primary)" }}>★ {m.rating ? m.rating.toFixed(1) : "N/A"}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
+          <div className="recommendations-container">
+            <h2 className="section-title">Curating perfect matches...</h2>
+            <div className="carousel-container">
+              <div className="movie-carousel skeleton-carousel">
+                {[...Array(6)].map((_, i) => (
+                   <div key={i} className="skeleton-card"></div>
+                ))}
+              </div>
             </div>
-          </>
+          </div>
+        ) : recommendations.length > 0 ? (
+          <div className="recommendations-container">
+            <h2 className="section-title">Because you watched <span className="title-highlight">{selectedMovie?.title}</span></h2>
+            <div className="carousel-container">
+              <button className="carousel-arrow left-arrow" onClick={() => scrollCarousel('left')}>‹</button>
+              <div className="movie-carousel" ref={carouselRef}>
+                {recommendations.map((m, i) => {
+                  const fakeMatchScore = Math.max(98 - (i * 2), 65); // Descending Netflix-style match score
+                  return (
+                    <div key={i} className="movie-card premium-card" onClick={() => selectMovie(m.title)} style={{ animationDelay: `${i * 0.05}s` }}>
+                      <div className="movie-poster-wrapper">
+                        <img 
+                          className="movie-poster" 
+                          src={m.poster || "https://via.placeholder.com/300x450?text=No+Poster"} 
+                          alt={m.title} 
+                        />
+                        <div className="card-overlay">
+                            <div className="overlay-content">
+                               <h3 className="movie-title">{m.title}</h3>
+                               <div className="movie-stats">
+                                 <span className="match-score">{fakeMatchScore}% Match</span>
+                                 <span className="movie-year">{m.year}</span>
+                               </div>
+                               <div className="movie-rating">★ {m.rating ? m.rating.toFixed(1) : "N/A"}</div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="carousel-arrow right-arrow" onClick={() => scrollCarousel('right')}>›</button>
+            </div>
+          </div>
         ) : (
-          selectedMovie && <p>No exact recommendations found. Try a different movie.</p>
+          selectedMovie && <p className="no-recs">No exact recommendations found. Try a different film.</p>
         )}
       </div>
     </div>
