@@ -8,9 +8,9 @@ A machine learning-based movie recommendation system that predicts and suggests 
 
 This project builds a recommendation engine using:
 
-* Content-Based Filtering
-* Collaborative Filtering
-* Hybrid Approach (combined model)
+- Content-Based Filtering
+- Collaborative Filtering
+- Hybrid Approach (combined model)
 
 The system analyzes movie metadata and user behavior to generate personalized recommendations instead of random or genre-only suggestions.
 
@@ -20,8 +20,8 @@ The system analyzes movie metadata and user behavior to generate personalized re
 
 ### 1. Content-Based Filtering
 
-* Uses movie features like genres, keywords, cast
-* Recommends movies similar to the input movie
+- Uses movie features like genres, keywords, cast
+- Recommends movies similar to the input movie
 
 Example:
 Input → The Dark Knight
@@ -31,8 +31,8 @@ Output → Similar action/crime movies
 
 ### 2. Collaborative Filtering
 
-* Uses user-item interaction (ratings)
-* Finds patterns among users with similar taste
+- Uses user-item interaction (ratings)
+- Finds patterns among users with similar taste
 
 Example:
 Users who liked Inception also liked other movies → recommended
@@ -41,30 +41,29 @@ Users who liked Inception also liked other movies → recommended
 
 ### 3. Hybrid Model
 
-* Combines both approaches
-* Improves accuracy and diversity of recommendations
+- Combines both approaches
+- Improves accuracy and diversity of recommendations
 
 ---
 
 ## 📊 Dataset
 
-* MovieLens Dataset (recommended)
-* Contains:
-
-  * User IDs
-  * Movie IDs
-  * Ratings
-  * Movie metadata
+- MovieLens Dataset (recommended)
+- Contains:
+  - User IDs
+  - Movie IDs
+  - Ratings
+  - Movie metadata
 
 ---
 
 ## ⚙️ Tech Stack
 
-* Python
-* Pandas
-* NumPy
-* Scikit-learn
-* Jupyter Notebook / VS Code
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Jupyter Notebook / VS Code
 
 ---
 
@@ -128,27 +127,27 @@ Recommended Movies:
 
 ## 🔥 Key Features
 
-* Movie-to-movie recommendation
-* User-based recommendation (if ratings available)
-* Similarity calculation using cosine similarity
-* Scalable architecture for future improvements
+- Movie-to-movie recommendation
+- User-based recommendation (if ratings available)
+- Similarity calculation using cosine similarity
+- Scalable architecture for future improvements
 
 ---
 
 ## ⚠️ Limitations
 
-* Cold start problem (new users/movies)
-* Requires sufficient data for accuracy
-* Content-based model may overfit to similar genres
+- Cold start problem (new users/movies)
+- Requires sufficient data for accuracy
+- Content-based model may overfit to similar genres
 
 ---
 
 ## 🚧 Future Improvements
 
-* Use deep learning / neural collaborative filtering
-* Deploy as a web app (React + Flask)
-* Add real-time recommendation API
-* Integrate Transformer-based models
+- Use deep learning / neural collaborative filtering
+- Deploy as a web app (React + Flask)
+- Add real-time recommendation API
+- Integrate Transformer-based models
 
 ---
 
@@ -160,8 +159,10 @@ This project demonstrates how recommendation systems work in real-world platform
 
 ## 📚 References
 
-* MovieLens Dataset
-* Scikit-learn Documentation
-* Research papers on Recommendation Systems
+- MovieLens Dataset
+- Scikit-learn Documentation
+- Research papers on Recommendation Systems
 
 ---
+
+Test push
