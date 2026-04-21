@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 import requests
+from functools import lru_cache
 
 app = FastAPI()
 
@@ -78,7 +79,8 @@ async def recommend(movie: str, user_id: int = 1, top_n: int = 5):
 
 # 🎥 ENHANCED DETAILS (For Premium UI)
 @app.get("/poster")
-async def get_poster(title: str):
+@lru_cache(maxsize=1024)
+def get_poster(title: str):
     clean_title = title.split("(")[0].strip()
 
     url = "https://api.themoviedb.org/3/search/movie"

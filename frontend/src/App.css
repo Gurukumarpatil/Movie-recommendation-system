@@ -163,6 +163,103 @@
   transform: scale(0.95);
 }
 
+/* Premium Landing Layout */
+.landing-copy {
+  flex: 1;
+  max-width: 500px;
+  animation: fadeRight 0.8s ease-out;
+}
+
+@keyframes fadeRight {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.landing-title {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1.5px;
+}
+
+.landing-desc {
+  font-size: 18px;
+  color: #a1a1aa;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.search-instruction {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--red-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: pulseColor 2s infinite;
+}
+
+@keyframes pulseColor {
+  0% { color: var(--red-primary); }
+  50% { color: #f87171; }
+  100% { color: var(--red-primary); }
+}
+
+.landing-collage {
+  flex: 1;
+  position: relative;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  animation: fadeLeft 1s ease-out;
+}
+
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.collage-img {
+  position: absolute;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.img-1 {
+  width: 200px;
+  z-index: 2;
+  transform: rotate(-12deg) translateX(-100px) translateY(20px);
+}
+
+.img-2 {
+  width: 240px;
+  z-index: 3;
+  transform: translateZ(50px);
+}
+
+.img-3 {
+  width: 180px;
+  z-index: 1;
+  transform: rotate(15deg) translateX(120px) translateY(-10px);
+}
+
+.landing-collage:hover .img-1 {
+  transform: rotate(-18deg) translateX(-120px) translateY(10px) scale(1.05);
+}
+
+.landing-collage:hover .img-2 {
+  transform: translateZ(80px) scale(1.05);
+}
+
+.landing-collage:hover .img-3 {
+  transform: rotate(20deg) translateX(140px) translateY(-20px) scale(1.05);
+}
+
 /* Movie Grid */
 .content-section {
   padding: 48px;

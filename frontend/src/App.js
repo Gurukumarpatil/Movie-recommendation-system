@@ -88,7 +88,7 @@ function App() {
     <div className="app-container">
       {/* 🚀 GLASMORPHIC NAVBAR */}
       <nav className="navbar">
-        <div className="logo">CineFlow</div>
+        <div className="logo">CineMatch</div>
         <div className="search-container">
           <input
             className="search-input"
@@ -119,18 +119,34 @@ function App() {
         }}
       >
         <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <h1 className="hero-title">{selectedMovie ? selectedMovie.title : "Discover Your Next Favorite Film"}</h1>
-          {selectedMovie && (
+        <div className="hero-content" style={!selectedMovie ? { maxWidth: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: '40px' } : {}}>
+          {selectedMovie ? (
             <>
+              <h1 className="hero-title">{selectedMovie.title}</h1>
               <div className="hero-meta">
                 <span className="hero-rating">★ {selectedMovie.rating.toFixed(1)}</span>
                 <span>{selectedMovie.year}</span>
               </div>
               <p className="hero-desc">{selectedMovie.overview || "Select a movie to explore customized recommendations."}</p>
             </>
+          ) : (
+            <>
+              <div className="landing-copy">
+                <h1 className="landing-title">Find the films you were meant to watch.</h1>
+                <p className="landing-desc">
+                  Stop endlessly scrolling. CineMatch analyzes your taste to recommend hidden gems and blockbuster hits you'll actually love.
+                </p>
+                <div className="search-instruction">
+                  <span>↑ Use the search bar above to start exploring</span>
+                </div>
+              </div>
+              <div className="landing-collage">
+                <img className="collage-img img-1" src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Poster 1" />
+                <img className="collage-img img-2" src="https://image.tmdb.org/t/p/w500/gEU2QlsEOVhVNcu6lxU4aD6N2fA.jpg" alt="Poster 2" />
+                <img className="collage-img img-3" src="https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg" alt="Poster 3" />
+              </div>
+            </>
           )}
-          {!selectedMovie && <p className="hero-desc">Start by searching a movie in the top right to generate customized recommendations powered by advanced collaborative filtering.</p>}
         </div>
       </div>
 
